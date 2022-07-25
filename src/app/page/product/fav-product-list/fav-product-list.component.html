@@ -1,0 +1,70 @@
+<mat-form-field>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
+  </mat-form-field>
+  
+  <div class="example-container mat-elevation-z8">
+    <div class="example-table-container table-responsive">
+      <table mat-table [dataSource]="dataSource" matSort>
+       
+        <!-- Position Column -->
+        <ng-container matColumnDef="thumbnail">
+            <th mat-header-cell *matHeaderCellDef>Thumbnail </th>
+            <td mat-cell *matCellDef="let element"> 
+                <img [src]="element.thumbnail" class="thumbnail"/>
+             </td>
+          </ng-container>
+        <ng-container matColumnDef="brand">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Brand </th>
+          <td mat-cell *matCellDef="let element" class='m-card-title' test data-label='Brand'> {{element.brand}}</td>
+        </ng-container>
+  
+        <!-- Name Column -->
+        <ng-container matColumnDef="category">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Category </th>
+          <td mat-cell *matCellDef="let element" class='m-card-sub-title' data-label='Form type'> {{element.category}} </td>
+        </ng-container>
+  
+        <!-- <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>description </th>
+            <td mat-cell *matCellDef="let element" class='m-card-sub-title' data-label='Form type'> {{element.description}} </td>
+          </ng-container>
+     -->
+  
+          <ng-container matColumnDef="discountPercentage">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Discount% </th>
+            <td mat-cell *matCellDef="let element" class='m-card-sub-title' data-label='Form type'> {{element.discountPercentage}}% </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Price </th>
+            <td mat-cell *matCellDef="let element" class='m-card-sub-title' data-label='Form type'> {{element.price}} </td>
+          </ng-container>
+  
+        
+          <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>title </th>
+            <td mat-cell *matCellDef="let element" class='m-card-sub-title' data-label='Form type'> {{element.title}} </td>
+          </ng-container>
+            <!-- Weight Column -->
+  
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="star">
+          <th mat-header-cell *matHeaderCellDef> </th>
+          <td mat-cell *matCellDef="let element"> 
+            <ng-container *ngIf="!hidddenButton(element)">
+              <mat-icon (click)="addFavorProduct(element)">favorite</mat-icon>
+           
+            </ng-container>
+            <ng-container *ngIf="hidddenButton(element)">
+              <mat-icon (click)="addFavorProduct(element)">favorite_border</mat-icon>
+       
+            </ng-container>
+           </td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+    <mat-paginator [pageSizeOptions]="[10, 20, 30]"></mat-paginator>
+  </div>
